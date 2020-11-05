@@ -23,14 +23,14 @@ class FragmentChat: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         rootChatView = inflater.inflate(R.layout.fragment_chat, container, false)
-
         loadChatsAlerts()
         return rootChatView
     }
 
-    /**
+    /****
      * La idea es que aqui consulten los chats pendientes del usuario de la base de datos y lo cargen en el adaptador
-     * */
+     *****/
+
     private fun loadChatsAlerts() {
 
         for (i in 0..10)
@@ -45,8 +45,6 @@ class FragmentChat: Fragment() {
 
     fun openActivity(view: View, chat: ChatAlert) {
         var act = getActivity() as HomeActivity
-
         act.changeFragment(FragmentChatRoom(), "fragmentChatRoom")
-       // startActivity(Intent(getActivity(),ChatRoom::class.java))
     }
 }

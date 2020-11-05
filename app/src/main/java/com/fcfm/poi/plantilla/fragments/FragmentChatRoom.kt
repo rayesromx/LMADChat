@@ -7,9 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.fcfm.poi.plantilla.R
 import com.fcfm.poi.plantilla.adapters.ChatRoomAdapter
-import com.fcfm.poi.plantilla.adapters.GroupChatAdapter
-import com.fcfm.poi.plantilla.models.GroupChat
 import com.fcfm.poi.plantilla.models.Mensaje
+import kotlinx.android.synthetic.main.fragment_chat_room.view.*
 import kotlinx.android.synthetic.main.fragment_group_chat.view.*
 
 class FragmentChatRoom : Fragment() {
@@ -28,10 +27,13 @@ class FragmentChatRoom : Fragment() {
     }
 
     private fun loadMensajes() {
-        for (i in 1..10)
-            list.add(Mensaje(de = "Mario Cabrera", contenido = "Hola"))
+       for (i in 0..10) {
+           if(i%2==0)
+            list.add(Mensaje(de = "Mario Cabrera", contenido = "Hola", esMio = false))
+           else
+               list.add(Mensaje(de = "Mario Cabrera", contenido = "Hola", esMio = true))
+       }
         adapter = ChatRoomAdapter(list)
-        rootView.rvGroupChats.adapter = adapter
+        rootView.rvChatRoom.adapter = adapter
     }
-
 }

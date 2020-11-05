@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.fcfm.poi.plantilla.HomeActivity
 import com.fcfm.poi.plantilla.R
 import com.fcfm.poi.plantilla.adapters.ChatAlertAdapter
 import com.fcfm.poi.plantilla.adapters.GroupChatAdapter
@@ -34,8 +35,14 @@ class FragmentGroupChat : Fragment() {
     private fun loadGroupChats() {
         for (i in 1..10)
             gropuChatList.add(GroupChat("Grupo $i", ""))
-        groupChatAdapter = GroupChatAdapter(gropuChatList)
+        groupChatAdapter = GroupChatAdapter(gropuChatList,
+            this.context,
+            { view, group -> openActivity(view, group) })
         rootGroupChatView.rvGroupChats.adapter = groupChatAdapter
     }
 
+    fun openActivity(view: View, group: GroupChat) {
+        var act = getActivity() as HomeActivity
+        act.changeFragment(FragmentGroupChatRoom(), "fragmentGroupChatRoom")
+    }
 }

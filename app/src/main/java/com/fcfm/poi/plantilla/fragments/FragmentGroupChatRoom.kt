@@ -7,13 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import com.fcfm.poi.plantilla.R
 import com.fcfm.poi.plantilla.adapters.ChatRoomAdapter
+import com.fcfm.poi.plantilla.adapters.GroupChatRoomAdapter
 import com.fcfm.poi.plantilla.models.Mensaje
 import kotlinx.android.synthetic.main.fragment_chat_room.view.*
 import kotlinx.android.synthetic.main.fragment_group_chat.view.*
 
-class FragmentChatRoom : Fragment() {
+class FragmentGroupChatRoom : Fragment() {
     private lateinit var rootView: View
-    private lateinit var adapter: ChatRoomAdapter
+    private lateinit var adapter: GroupChatRoomAdapter
     private val list = mutableListOf<Mensaje>()
 
     override fun onCreateView(
@@ -21,19 +22,23 @@ class FragmentChatRoom : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        rootView = inflater.inflate(R.layout.fragment_group_chat, container, false)
+        rootView = inflater.inflate(R.layout.fragment_chat_room, container, false)
         loadMensajes()
         return rootView
     }
 
     private fun loadMensajes() {
-       for (i in 0..10) {
-           if(i%2==0)
-            list.add(Mensaje(de = "Mario Cabrera", contenido = "Hola", esMio = false))
-           else
-               list.add(Mensaje(de = "Mario Cabrera", contenido = "Hola", esMio = true))
-       }
-        adapter = ChatRoomAdapter(list)
-        rootView.rvGroupChats.adapter = adapter
+
+        for (i in 0..15) {
+            if(i%2==0)
+                list.add(Mensaje(de = "Brenda Esparza", contenido = "Que onda", esMio = false))
+            else if(i%3==0)
+                list.add(Mensaje(de = "Mario Brodel", contenido = "Hola", esMio = false))
+            else
+                list.add(Mensaje(de = "Luis Brodel", contenido = "Que tal x $i", esMio = true))
+        }
+
+        adapter = GroupChatRoomAdapter(list)
+        rootView.rvChatRoom.adapter = adapter
     }
 }
